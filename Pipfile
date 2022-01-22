@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+sqlalchemy = "*"
+psycopg2-binary = "*"
+python-dotenv = "*"
+
+[dev-packages]
+flake8 = "*"
+
+[scripts]
+start = 'flask run --host=0.0.0.0 --port=80'
+lint = 'flake8 .'

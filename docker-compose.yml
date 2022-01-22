@@ -1,0 +1,26 @@
+version: "3.3"
+
+services:
+  web:
+    build: .
+    volumes:
+     - .:/app
+    ports:
+     - 8080:80
+    command: pipenv run start
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    volumes:
+     - ./host/directory:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_DB=${PGDATABASE}
+      - POSTGRES_USER=${PGUSER}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+    ports:
+     - 5432:5432
+
+
+  

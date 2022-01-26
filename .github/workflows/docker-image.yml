@@ -1,0 +1,45 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      FLASK_APP: ${{ secrets.FLASK_APP }}
+      FLASK_DEBUG: ${{ secrets.FLASK_DEBUG }}
+      PGOWNER: ${{ secrets.PGOWNER }}
+      PGOWNERPASSWORD: ${{ secrets.PGOWNERPASSWORD }}
+      PGUSER: ${{ secrets.PGUSER }}
+      PGPASSWORD: ${{ secrets.PGPASSWORD }}
+      PGHOST: ${{ secrets.PGHOST }}
+      PGFETCH: ${{ secrets.PGFETCH }}
+      PGDATABASE: ${{ secrets.PGDATABASE }}
+      PGPORT: ${{ secrets.PGPORT }}
+      LIMIT: ${{ secrets.LIMIT }}
+      PERIOD: ${{ secrets.PERIOD }}
+      REAL_IP: ${{ secrets.REAL_IP }}
+      
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: bash deploy.sh
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: Commit Image
+      run: docker commit web ${{ secrets.DOCKER_USERNAME }}/apiservice
+      
+    - name: Push to Docker Hub
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/apiservice

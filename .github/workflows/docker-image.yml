@@ -38,6 +38,8 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     
+    - name: Check Images
+      run: docker images
     - name: Commit Image
       run: docker commit web ${{ secrets.DOCKER_USERNAME }}/apiservice
       

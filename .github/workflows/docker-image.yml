@@ -48,4 +48,4 @@ jobs:
         echo $TAG
       
     - name: Push to Docker Hub
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/apiservice:${{ env.TAG }}
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/apiservice:$TAG

@@ -39,8 +39,11 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Commit Image
+    - name: Change Image Tag
       run: docker tag containerization_web:latest ${{ secrets.DOCKER_USERNAME }}/apiservice
       
+    - name: Get Commit Hash
+      run: export TAG=$(git rev-parse --short HEAD)
+      
     - name: Push to Docker Hub
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/apiservice
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/apiservice:${TAG}

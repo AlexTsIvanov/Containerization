@@ -14,5 +14,5 @@ echo "CREATE USER ${PGOWNER} WITH PASSWORD '${PGOWNERPASSWORD}';" > tmp
 cat ${PGDATABASE}.sql >> tmp
 mv tmp ${PGDATABASE}.sql
 
-docker-compose up
+docker-compose up -d
 

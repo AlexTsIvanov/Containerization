@@ -39,7 +39,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     
     - name: Check Images
-      run: docker images
+      run: docker image ls | grep web
     - name: Commit Image
       run: docker commit web ${{ secrets.DOCKER_USERNAME }}/apiservice
       

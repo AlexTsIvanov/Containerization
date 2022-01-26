@@ -43,7 +43,9 @@ jobs:
       run: docker tag containerization_web:latest ${{ secrets.DOCKER_USERNAME }}/apiservice
       
     - name: Get Commit Hash
-      run: export TAG=$(git rev-parse --short HEAD)
+      run: |
+        export TAG=$(git rev-parse --short HEAD)
+        echo $TAG
       
     - name: Push to Docker Hub
       run: docker push ${{ secrets.DOCKER_USERNAME }}/apiservice:${{ env.TAG }}

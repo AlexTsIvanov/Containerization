@@ -32,7 +32,7 @@ jobs:
     - name: Build the Docker image
       run: bash deploy.sh
     - name: Check web container
-      run: docker image ps
+      run: docker ps
     - name: Log in to Docker Hub
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       with:
@@ -40,7 +40,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Commit Image
-      run: docker commit containerization_web ${{ secrets.DOCKER_USERNAME }}/apiservice
+      run: docker commit containerization_web:latest ${{ secrets.DOCKER_USERNAME }}/apiservice
       
     - name: Push to Docker Hub
       run: docker push ${{ secrets.DOCKER_USERNAME }}/apiservice

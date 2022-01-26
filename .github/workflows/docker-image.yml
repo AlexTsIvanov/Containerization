@@ -46,4 +46,4 @@ jobs:
       run: export TAG=$(git rev-parse --short HEAD)
       
     - name: Push to Docker Hub
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/apiservice:${{ TAG }}
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/apiservice:${{ env.TAG }}

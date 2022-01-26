@@ -40,7 +40,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Commit Image
-      run: docker commit containerization_web:latest ${{ secrets.DOCKER_USERNAME }}/apiservice
+      run: docker tag containerization_web:latest ${{ secrets.DOCKER_USERNAME }}/apiservice
       
     - name: Push to Docker Hub
       run: docker push ${{ secrets.DOCKER_USERNAME }}/apiservice
